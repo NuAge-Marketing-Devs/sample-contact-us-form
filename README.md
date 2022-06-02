@@ -1,4 +1,4 @@
-# Sashco Contact Us
+# Contact Us Form for website
 
 The folder called "Website code" has code for a website. It uses bootstrap css for demo purposes, but the style can be modified to fit your website without impacting the funtionality. 
 
