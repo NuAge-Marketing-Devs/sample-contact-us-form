@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #success {
+            display: none;
+        }
+
+        #logSuccess {
+            display: none;
+        }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+</head>
+<body>
+    <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="min-width: 100%; "
+        class="stylingblock-content-wrapper">
+        <tr>
+            <td class="stylingblock-content-wrapper camarker-inner">
+                <div class="container" id="success">
+                    <br>
+                    <br>
+                    <h5>
+                        <i>Thank you!</i><br><br>
+                        Our Customer Service Team will respond to you within 1 business day.<br><br>
+                    </h5>
+                    <br>
+                    <br>
+                </div>
+                <div class="container">
+                    <form class="form row g-3" id="subscribeForm" method="post">
+                        <div class="col-md-6">
+                            <label for="FirstName" class="form-label">First Name *</label>
+                            <input type="text" class="form-control" name="FirstName" id="FirstName" required=""
+                                maxlength="40">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="LastName" class="form-label">Last Name *</label>
+                            <input type="text" class="form-control" name="LastName" id="LastName" required=""
+                                maxlength="80">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="Email" class="form-label">Email *</label>
+                            <input type="email" class="form-control" name="Email" id="Email" required=""
+                                maxlength="254">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="Phone" class="form-label">Phone Number *</label>
+                            <input type="tel" class="form-control" name="Phone" id="Phone" required="" maxlength="50">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="City" class="form-label">City *</label>
+                            <input type="text" class="form-control" name="City" id="City" required="" maxlength="255">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="State" class="form-label">State/Region *</label>
+                            <select name="State" id="State" class="form-select" required="">
+                                <option selected="" value="">Choose...</option>
+                                <optgroup label="United States">
+                                    <option value="Alabama">Alabama</option>
+                                    <option value="Alaska">Alaska</option>
+                                    <option value="Arizona">Arizona</option>
+                                    <option value="Arkansas">Arkansas</option>
+                                    <option value="California">California</option>
+                                    <option value="Colorado">Colorado</option>
+                                    <option value="Connecticut">Connecticut</option>
+                                    <option value="Delaware">Delaware</option>
+                                    <option value="District of Columbia">District of Columbia</option>
+                                    <option value="Florida">Florida</option>
+                                    <option value="Georgia">Georgia</option>
+                                    <option value="Hawaii">Hawaii</option>
+                                    <option value="Idaho">Idaho</option>
+                                    <option value="Illinois">Illinois</option>
+                                    <option value="Indiana">Indiana</option>
+                                    <option value="Iowa">Iowa</option>
+                                    <option value="Kansas">Kansas</option>
+                                    <option value="Kentucky">Kentucky</option>
+                                    <option value="Louisiana">Louisiana</option>
+                                    <option value="Maine">Maine</option>
+                                    <option value="Maryland">Maryland</option>
+                                    <option value="Massachusetts">Massachusetts</option>
+                                    <option value="Michigan">Michigan</option>
+                                    <option value="Minnesota">Minnesota</option>
+                                    <option value="Mississippi">Mississippi</option>
+                                    <option value="Missouri">Missouri</option>
+                                    <option value="Montana">Montana</option>
+                                    <option value="Nebraska">Nebraska</option>
+                                    <option value="Nevada">Nevada</option>
+                                    <option value="New Hampshire">New Hampshire</option>
+                                    <option value="New Jersey">New Jersey</option>
+                                    <option value="New Mexico">New Mexico</option>
+                                    <option value="New York">New York</option>
+                                    <option value="North Carolina">North Carolina</option>
+                                    <option value="North Dakota">North Dakota</option>
+                                    <option value="Ohio">Ohio</option>
+                                    <option value="Oklahoma">Oklahoma</option>
+                                    <option value="Oregon">Oregon</option>
+                                    <option value="Pennsylvania">Pennsylvania</option>
+                                    <option value="Puerto Rico">Puerto Rico</option>
+                                    <option value="Rhode Island">Rhode Island</option>
+                                    <option value="South Carolina">South Carolina</option>
+                                    <option value="South Dakota">South Dakota</option>
+                                    <option value="Tennessee">Tennessee</option>
+                                    <option value="Texas">Texas</option>
+                                    <option value="Utah">Utah</option>
+                                    <option value="Vermont">Vermont</option>
+                                    <option value="Virginia">Virginia</option>
+                                    <option value="Washington">Washington</option>
+                                    <option value="West Virginia">West Virginia</option>
+                                    <option value="Wisconsin">Wisconsin</option>
+                                    <option value="Wyoming">Wyoming</option>
+                                </optgroup>
+                                <optgroup label="Canada">
+                                    <option value="Alberta">Alberta</option>
+                                    <option value="British Columbia">British Columbia</option>
+                                    <option value="Manitoba">Manitoba</option>
+                                    <option value="New Brunswick">New Brunswick</option>
+                                    <option value="Newfoundland and Labrador">Newfoundland and Labrador</option>
+                                    <option value="Nova Scotia">Nova Scotia</option>
+                                    <option value="Ontario">Ontario</option>
+                                    <option value="Prince Edward Island">Prince Edward Island</option>
+                                    <option value="Quebec">Quebec</option>
+                                    <option value="Saskatchewan">Saskatchewan</option>
+                                    <option value="Northwest Territories">Northwest Territories</option>
+                                    <option value="Nunavut">Nunavut</option>
+                                    <option value="Yukon">Yukon</option>
+                                </optgroup>
+                                <optgroup>
+                                </optgroup>
+                            </select>
+                        </div>
+                        <div class="col-12">
+                            <label for="Region" class="form-label">Country *</label>
+                            <select name="Region" id="Region" class="form-select" required="">
+                                <option selected="" value="">Choose...</option>
+                                <option value="US">United States</option>
+                                <option value="CA">Canada</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="col-12">
+                            <label for="ProductGroup" class="form-label">Is this inquiry about our home caulk products
+                                or log home products? *</label>
+                            <select name="ProductGroup" id="ProductGroup" class="form-select" required>
+                                <option selected="" value="">Choose...</option>
+                                <option value="hi">Home Caulk Products</option>
+                                <option value="Log">Log Home Products</option>
+                                <option value="Sashco">All Sashco Products</option>
+                            </select>
+                        </div>
+                        <div class="col-12" id="TypeOfProjectDiv">
+                            <label for="TypeOfProject" class="form-label">What type of project is this regarding?
+                                *</label>
+                            <select name="TypeOfProject" id="TypeOfProject" class="form-select">
+                                <option selected="" value="">Choose...</option>
+                                <option value="New_Construction">New Construction</option>
+                                <option value="Restoration">Restoration</option>
+                                <option value="Maintenance">Maintenance</option>
+                            </select>
+                        </div>
+                        <div class="col-12">
+                            <label for="Homeowner_Contractor" class="form-label">I am a: *</label>
+                            <select name="Homeowner_Contractor" id="Homeowner_Contractor" class="form-select" required>
+                                <option selected="" value="">Select the closest option...</option>
+                                <option value="DIY_Home">DIYers & Homeowners</option>
+                                <option value="Contactor_Pro">Contractor / Professional</option>
+                                <option value="Dealter_Retailer">Dealer / Retailer</option>
+                            </select>
+                        </div>
+                        <div class="form-group" id="howHelpFieldGroupDiv">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="Help" class="form-label">How can we help? *</label>
+                                    <select name="Help" id="Help" class="form-select">
+                                        <option selected="" value="">Choose...</option>
+                                        <option value="where_to_buy">Where can I buy Sashco products</option>
+                                        <option value="sales_conversation">I would like to speak to sales person
+                                        </option>
+                                        <option value="product_sample">I would like a product sample</option>
+                                        <option value="formal_training">I’m looking for formal training for me/my staff
+                                        </option>
+                                        <option value="technical_question">I have a product specs / technical question
+                                        </option>
+                                        <option value="product_compatibility">I have product compatibility question
+                                        </option>
+                                        <option value="jobsite_issue">I'm having an issue on the job, what should I do?
+                                        </option>
+                                        <option value="shipping">I have a shipping inquiry</option>
+                                        <option value="general">I have a general customer service question</option>
+                                        <option value="other">Other (Give us more detail below)</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="BestFit" class="form-label">Select the best fit for your job: *</label>
+                                    <select name="BestFit" id="BestFit" class="form-select">
+                                        <option selected="" value="">Choose...</option>
+                                        <option value="Contractor">General Contractor / Remodeler</option>
+                                        <option value="Exterior_Contractor">Exterior Contractor</option>
+                                        <option value="Farm_Ranch">Farm & Ranch</option>
+                                        <option value="Roofer">Roofer</option>
+                                        <option value="Mason">Mason</option>
+                                        <option value="Home_Center">Home Center</option>
+                                        <option value="Skilled_Tradesman">Skilled Tradesman</option>
+                                        <option value="Facility_Maintenance">Facility Maintenance Professional</option>
+                                        <option value="Log_Specific">Log Specific</option>
+                                        <option value="Hardware_Store">Hardware Store</option>
+                                        <option value="Building_Materials">Building Materials Distributor</option>
+                                        <option value="Misc">Misc</option>
+                                        <option value="Lumber_Yard">Lumber Yard</option>
+                                        <option value="MRO">MRO</option>
+                                        <option value="E_Commerce">E-Commerce</option>
+                                        <option value="Large_Retailer">Large Retailer</option>
+                                        <option value="Paint">Paint</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group" id="companyDiv">
+                            <div class="col-12">
+                                <label for="Company" class="form-label">Company Name *</label>
+                                <input type="text" class="form-control" name="Company" id="Company" maxlength="100">
+                            </div>
+                        </div>
+                        <div class="form-group" id="cartridgeVolDiv">
+                            <div class="col-12">
+                                <label for="weekly_cartridge_volume" class="form-label">How many cartridges of caulk do
+                                    you or your crew(s) use weekly? *</label>
+                                <select name="weekly_cartridge_volume" id="weekly_cartridge_volume" class="form-select">
+                                    <option selected="" value="">Choose...</option>
+                                    <option value="0-4">0-4</option>
+                                    <option value="5-12">5-12</option>
+                                    <option value="13-24">13-24</option>
+                                    <option value="25-36">25-36</option>
+                                    <option value="37+">37+</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group" id="caseVolDiv">
+                            <div class="col-12">
+                                <label for="monthly_case_volume" class="form-label">How many cases of Sashco caulk do
+                                    you go through per month? (All Sashco brands combined) *</label>
+                                <select name="monthly_case_volume" id="monthly_case_volume" class="form-select">
+                                    <option selected="" value="">Choose...</option>
+                                    <option value="None">None</option>
+                                    <option value="0-4">0-4</option>
+                                    <option value="5-12">5-12</option>
+                                    <option value="13-24">13-24</option>
+                                    <option value="25-36">25-36</option>
+                                    <option value="36+">36+</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group brandClass" id="brandDiv">
+                            <label> Do you carry any of these Sashco Brands? Select all that apply:</label>
+                            <br><br>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="BrandType" id="brandBackerRod"
+                                    value="BackerRod">
+                                <label class="form-check-label" for="brandBackerRod">
+                                    Backer Rod
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="BrandType" id="brandBigStretch"
+                                    value="BigStretch">
+                                <label class="form-check-label" for="brandBigStretch">
+                                    Big Stretch (Windows, Doors & Siding)
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="BrandType" id="brandBlastMedia"
+                                    value="BlastMedia">
+                                <label class="form-check-label" for="brandBlastMedia">
+                                    Blast Media
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="BrandType" id="brandCapture"
+                                    value="Capture">
+                                <label class="form-check-label" for="brandCapture">
+                                    Capture
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="BrandType" id="brandCascade"
+                                    value="Cascade">
+                                <label class="form-check-label" for="brandCascade">
+                                    Cascade
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="BrandType" id="brandChinkersEdge"
+                                    value="ChinkersEdge">
+                                <label class="form-check-label" for="brandChinkersEdge">
+                                    Chinker's Edge
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="BrandType" id="brandCleanSeal"
+                                    value="CleanSeal">
+                                <label class="form-check-label" for="brandCleanSeal">
+                                    Clean Seal
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="BrandType" id="brandCobra"
+                                    value="Cobra">
+                                <label class="form-check-label" for="brandCobra">
+                                    Cobra
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="BrandType" id="brandConceal"
+                                    value="Conceal">
+                                <label class="form-check-label" for="brandConceal">
+                                    Conceal
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="BrandType" id="brandeXactColor"
+                                    value="eXactColor">
+                                <label class="form-check-label" for="brandeXactColor">
+                                    eXact Color (Custom Tint)
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="BrandType" id="brandLexel"
+                                    value="Lexel">
+                                <label class="form-check-label" for="brandLexel">
+                                    Lexel (Multi-Purpose)
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="BrandType" id="brandLogBuilder"
+                                    value="LogBuilder">
+                                <label class="form-check-label" for="brandLogBuilder">
+                                    Log Builder
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="BrandType" id="brandLogJam"
+                                    value="LogJam">
+                                <label class="form-check-label" for="brandLogJam">
+                                    Log Jam
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="BrandType" id="brandMorFlexx"
+                                    value="MorFlexx">
+                                <label class="form-check-label" for="brandMorFlexx">
+                                    Mor-Flexx (Mortar & Stucco)
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="BrandType" id="brandSlab"
+                                    value="Slab">
+                                <label class="form-check-label" for="brandSlab">
+                                    Slab (Concrete)
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="BrandType" id="brandSymphony"
+                                    value="Symphony">
+                                <label class="form-check-label" for="brandSymphony">
+                                    Symphony
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="BrandType"
+                                    id="brandThroughtheRoof" value="Through_the_Roof">
+                                <label class="form-check-label" for="brandThroughtheRoof">
+                                    Through the Roof (Roofs, Gutters, Vents, Flashing)
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="BrandType"
+                                    id="brandTransformationDeckandFence" value="Transformation_Deck_and_Fence">
+                                <label class="form-check-label" for="brandTransformationDeckandFence">
+                                    Transformation Deck and Fence
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="BrandType"
+                                    id="brandTransformationLogandTimber" value="Transformation_Log_and_Timber">
+                                <label class="form-check-label" for="brandTransformationLogandTimber">
+                                    Transformation Log and Timber
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="BrandType"
+                                    id="brandTransformationSidingandTrim" value="Transformation_Siding_and_Trim">
+                                <label class="form-check-label" for="brandTransformationSidingandTrim">
+                                    Transformation Siding and Trim
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group projectTypeClass" id="projectTypeDiv">
+                            <label> What project types are you / will you be involved in? Select all that apply:
+                                *</label>
+                            <br><br>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="ProjectType"
+                                    id="projectTypeLogHome" value="LogHome">
+                                <label class="form-check-label" for="projectTypeLogHome">
+                                    Log Home
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="ProjectType"
+                                    id="projectTypeRoofGutters" value="RoofGutters">
+                                <label class="form-check-label" for="projectTypeRoofGutters">
+                                    Roof/Gutters
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="ProjectType"
+                                    id="projectTypeSiding" value="Siding">
+                                <label class="form-check-label" for="projectTypeSiding">
+                                    Siding
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="ProjectType"
+                                    id="projectTypeConcreteMortarStucco" value="ConcreteMortarStucco">
+                                <label class="form-check-label" for="projectTypeConcreteMortarStucco">
+                                    Concrete/Mortar/Stucco
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="ProjectType"
+                                    id="projectTypeKitchenBath" value="KitchenBath">
+                                <label class="form-check-label" for="projectTypeKitchenBath">
+                                    Kitchen/Bath
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="ProjectType"
+                                    id="projectTypeWindowsDoors" value="WindowsDoors">
+                                <label class="form-check-label" for="projectTypeWindowsDoors">
+                                    Windows/Doors
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="ProjectType" id="projectTypePaint"
+                                    value="Paint">
+                                <label class="form-check-label" for="projectTypePaint">
+                                    Paint
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-12" id="logHomeDiv">
+                            <label for="AnnualHomeCount" class="form-label">How many log or wood homes do you finish or
+                                restore each
+                                year? *</label>
+                            <input type="text" class="form-control" name="AnnualHomeCount" id="AnnualHomeCount"
+                                required="" maxlength="40">
+                        </div>
+                        <div class="form-group" id="commentDiv">
+                            <div class="col-12">
+                                <label for="Comments" class="form-label">What questions, comments, or feedback do you
+                                    have for us? *</label>
+                                <textarea class="form-control" name="Comments" id="Comments" required=""
+                                    rows="3"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-check" id="optDiv">
+                            <input class="form-check-input" type="checkbox" value="" name="optIn" id="optIn">
+                            <label class="form-check-label" for="optIn">
+                                Yes, please add me to your eNewsletter!
+                            </label>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-success" id="samples-submit">SUBMIT</button>
+                        </div>
+                    </form>
+                </div>
+                <script type="text/javascript" src="conditional.js"></script>
+                <script>
+                    $('#subscribeForm').submit(function (event) {
+                        event.preventDefault();
+                        $('#alert').text('Processing...').fadeIn(0);
+                        $.ajax({
+                            url: 'https://cloud.e.sashco.com/contact-us-processing',
+                            type: 'post',
+                            data: $('#subscribeForm').serialize(),
+                            dataType: 'json',
+                            success: function (json) {
+                                console.log(json.message);
+                                if (json.ok) {
+                                    subscribeForm.style.display = "none";
+                                    if (json.message === "log") {
+                                        logSuccess.style.display = "block";
+                                    } else {
+                                        success.style.display = "block";
+                                    };
+                                } else {
+                                    console.log(json.ok);
+                                    console.log(json.message);
+                                    alert(json.message);
+                                }
+                            },
+                            error: function (data) {
+                                console.log('An error occurred.');
+                                console.log(data);
+                            }
+                        });
+                    });
+                </script>
+
+            </td>
+        </tr>
+    </table>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
