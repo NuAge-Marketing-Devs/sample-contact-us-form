@@ -40,22 +40,7 @@
      var salesforceId = subKey;
     } else {
      var subKey = email;
-    };
-    
-   if (hoCont === "Contactor_Pro"){
-     var hoCont = "Contractor / Pro"
-    } else if (hoCont === "Dealter_Retailer") {
-     var hoCont = "Dealer / Retailer"
-    };
-    
-    if(brandType){
-     var brandType = brandType.replace(/,/g, ";");
-    };
-    
-    if(projectType){
-     var projectType = projectType.replace(/,/g, ";");
-    };
-    
+    };  
       
     // Email Validation
     var authEndpoint = Platform.Function.Lookup('keys','authEndpoint','Service','SFMC');
@@ -88,9 +73,12 @@
       var validateEmail = HTTP.Post(requestUrl, contentType, Stringify(jsonBody), headerNames, headerValues);
       var aRes = Platform.Function.ParseJSON(validateEmail.Response.toString());
       var valid = aRes.valid;
+
+      // If the email addrses is valid
       if (valid) {
         var status = true;
                
+        // If the subscriber opts-in to Marketing Communications, add to Publication Lists
         if (optIn) {
         var newSubscriber = {
           EmailAddress: email,
@@ -105,113 +93,14 @@
         var status = subObj.Upsert(newSubscriber);
         };
      
-        // if log submission fire to transactional email to log notifications
-              
-        if (productGroup === "Log" || productGroup === "Sashco") {
-           
-            var message = "log";
-            var headerNames = ["Authorization"];
-            var headerValues = ["Bearer " + mcAccessToken];
-            var jsonBody = {
-                "definitionKey": "contact_us_notifications",  //Email definition Key
-                "recipient": 
-                 {
-                    "contactKey": "orders@sashco.com",
-                    "to": "orders@sashco.com",
-                    "attributes": {
-                        "SubscriberKey": "orders@sashco.com",
-                        "EmailAddress": "orders@sashco.com",
-                        "FirstName": firstName, 
-                        "LastName": lastName, 
-                        "Email": email, 
-                        "Phone": phone, 
-                        "City": city, 
-                        "State": state, 
-                        "Region": region, 
-                        "ProductGroup": productGroup, 
-                        "TypeOfProject": typeOfProject, 
-                        "Homeowner_Contractor": hoCont, 
-                        "Help": help, 
-                        "BestFit": bestFit,
-                        "Company": company, 
-                        "weekly_cartridge_volume": wklyCartVol, 
-                        "monthly_case_volume": mthlyCaseVol, 
-                        "BrandType": brandType, 
-                        "ProjectType": projectType, 
-                        "AnnualHomeCount": annualHomeCount, 
-                        "Comments": comments,
-                        "SalesforceId": salesforceId,
-                        "Intro": "LOG Contact Us Notification",
-                        "Subject": "New submission on Form Log - Contact Us"
-                                }
-                }
-            };
-    
-            var requestUrl = rest_instance_url + "/messaging/v1/email/messages/"+Count;  //URL for Transactional API with unique Id 
-    
-            var fireEmail = HTTP.Post(requestUrl, contentType, Stringify(jsonBody), headerNames, headerValues);
-        
-        } else if (region != "US") {
-      
-          var message = "hi";
-         
-          // if hi && (region = Other or Canada) then fire to transactional email to Hi notifications for outside the country
-   
-            var headerNames = ["Authorization"];
-            var headerValues = ["Bearer " + mcAccessToken];
-            var jsonBody = {
-                "definitionKey": "contact_us_notifications",  //Email definition Key
-                "recipient": 
-                {
-                    "contactKey": "orders@sashco.com",
-                    "to": "orders@sashco.com",
-                    "attributes": {
-                        "SubscriberKey": "orders@sashco.com",
-                        "EmailAddress": "orders@sashco.com",
-                        "FirstName": firstName, 
-                        "LastName": lastName, 
-                        "Email": email, 
-                        "Phone": phone, 
-                        "City": city, 
-                        "State": state, 
-                        "Region": region, 
-                        "ProductGroup": productGroup, 
-                        "TypeOfProject": typeOfProject, 
-                        "Homeowner_Contractor": hoCont, 
-                        "Help": help, 
-                        "BestFit": bestFit,
-                        "Company": company, 
-                        "weekly_cartridge_volume": wklyCartVol, 
-                        "monthly_case_volume": mthlyCaseVol, 
-                        "BrandType": brandType, 
-                        "ProjectType": projectType, 
-                        "AnnualHomeCount": annualHomeCount, 
-                        "Comments": comments,
-                        "SalesforceId": salesforceId,
-                        "Intro": "HI Contact Us was submitted from outside the US.",
-                        "Subject": "New submission from outside U.S. - HI Contact Us"
-                                }
-                }
-            };
+        // Fire into Journey using an API entry event
+        var headerNames = ["Authorization"];
+        var headerValues = ["Bearer " + mcAccessToken];
 
-            var requestUrl = rest_instance_url + "/messaging/v1/email/messages/"+Count;  //URL for Transactional API with unique Id 
-
-            var fireEmail = HTTP.Post(requestUrl, contentType, Stringify(jsonBody), headerNames, headerValues);
-
-
-        } else if (hoCont != "DIY_Home") {
-      
-          var message = "hi";
-         
-          // if hi && Pro or Dealer && selected salesperson or training selected fire to hi contact us journey - APIEvent-2d65595d-ca92-d185-834d-8277bf7171f8
-          
-           var headerNames = ["Authorization"];
-            var headerValues = ["Bearer " + mcAccessToken];
-
-            var jsonBody = {
-              "ContactKey": subKey,
-              "EventDefinitionKey": "APIEvent-2d65595d-ca92-d185-834d-8277bf7171f8",    //provide journey EVENT DEFINITION KEY
-              "Data": {
+        var jsonBody = {
+            "ContactKey": subKey,
+            "EventDefinitionKey": "APIEvent-2d65595d-ca92-d185-834d-8277bf7171f8",    //provide journey EVENT DEFINITION KEY
+            "Data": {
                   "FirstName": firstName, 
                   "LastName": lastName, 
                   "Email": email, 
@@ -232,70 +121,20 @@
                   "AnnualHomeCount": annualHomeCount, 
                   "Comments": comments,
                   "SubKey": subKey
-              }
-            };
+            }
+          };
 
-          var requestUrl = rest_instance_url + "/interaction/v1/events";
+        var requestUrl = rest_instance_url + "/interaction/v1/events";
 
-          var fireEntryEvent = HTTP.Post(requestUrl, contentType, Stringify(jsonBody), headerNames, headerValues);
- 
+        var fireEntryEvent = HTTP.Post(requestUrl, contentType, Stringify(jsonBody), headerNames, headerValues);
         
-      } else {
-      
-        var message = "hi";
-          
-        // if hi && DIYer then fire to transactional email to Hi notifications && remainder all to customer service notification
-
-           var headerNames = ["Authorization"];
-            var headerValues = ["Bearer " + mcAccessToken];
-            var jsonBody = {
-                "definitionKey": "contact_us_notifications",  //Email definition Key
-                "recipient": 
-                {
-                    "contactKey": "orders@sashco.com",
-                    "to": "orders@sashco.com",
-                    "attributes": {
-                        "SubscriberKey": "orders@sashco.com",
-                        "EmailAddress": "orders@sashco.com",
-                        "FirstName": firstName, 
-                        "LastName": lastName, 
-                        "Email": email, 
-                        "Phone": phone, 
-                        "City": city, 
-                        "State": state, 
-                        "Region": region, 
-                        "ProductGroup": productGroup, 
-                        "TypeOfProject": typeOfProject, 
-                        "Homeowner_Contractor": hoCont, 
-                        "Help": help, 
-                        "BestFit": bestFit,
-                        "Company": company, 
-                        "weekly_cartridge_volume": wklyCartVol, 
-                        "monthly_case_volume": mthlyCaseVol, 
-                        "BrandType": brandType, 
-                        "ProjectType": projectType, 
-                        "AnnualHomeCount": annualHomeCount, 
-                        "Comments": comments,
-                        "SalesforceId": salesforceId,
-                        "Intro": "HI Contact Us Notification",
-                        "Subject": "New submission on Form HI - Contact Us"
-                                }
-                }
-            };
-
-            var requestUrl = rest_instance_url + "/messaging/v1/email/messages/"+Count;  //URL for Transactional API with unique Id 
-
-            var fireEmail = HTTP.Post(requestUrl, contentType, Stringify(jsonBody), headerNames, headerValues);
-
-        };
-        
-    
-        var deName = 'Contact Us Submissions';
+      // Add rows to a Data Extension
+        var deName = 'Contact Us Submissions'; // name of data extension
         var insertColumnArr = ['FirstName', 'LastName', 'Email', 'Phone', 'City', 'State', 'Region', 'ProductGroup', 'TypeOfProject', 'Homeowner_Contractor', 'Help', 'BestFit',
                                'Company', 'weekly_cartridge_volume', 'monthly_case_volume', 'BrandType', 'ProjectType', 'AnnualHomeCount', 'Comments', 'optIn',
-                               'Host', 'Referer', 'UserAgent', 'SubKey'];
+                               'Host', 'Referer', 'UserAgent', 'SubKey']; // fields
         var insertColumnValueArr = [firstName, lastName, email, phone, city, state, region, productGroup, typeOfProject, hoCont, help, bestFit, company, wklyCartVol, mthlyCaseVol,
-                                    brandType, projectType, annualHomeCount, comments, optIn, requestHost, referer, userAgent, subKey];
+                                    brandType, projectType, annualHomeCount, comments, optIn, requestHost, referer, userAgent, subKey]; // values
         Platform.Function.InsertDE(deName, insertColumnArr, insertColumnValueArr);
         } else {
         var failedValidation = aRes.failedValidation;
