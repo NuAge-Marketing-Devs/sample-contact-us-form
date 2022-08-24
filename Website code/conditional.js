@@ -22,7 +22,7 @@ $("#Homeowner_Contractor").change(function () {
         $('#Help').removeAttr('required');
         $('#BestFit').removeAttr('required');
         $('#companyDiv').hide();
-        $('#Company').removeAttr('required');
+        $('#Company').removeAttr('required');s
         $('#cartridgeVolDiv').hide();
         $('#weekly_cartridge_volume').removeAttr('required');
         $('#caseVolDiv').hide();
